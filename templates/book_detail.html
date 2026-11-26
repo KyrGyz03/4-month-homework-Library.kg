@@ -1,23 +1,54 @@
-<h1>{{ book_id.title }} ({{ book_id.created_data_book }})</h1>
-<h2>Автор: {{ book_id.author }}</h2>
-<h3>Количество страниц: {{ book_id.count_pages }}</h3>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'book/css/book_detail.css' %}">
+</head>
+<body>
+    <main class="book">
+        <section class="book-detail">
+            <div class="book-detail__main">
+                <div class="book-detail__image">
+                {% if book_id.image_2 %}
+                    <img src="{{ book_id.image_2.url }}">
+                {% else %}
+                    <span class="book-detail__no-image">Фотография еще не добавлена</span>
+                {% endif %}
+                </div>
 
-{% if book_id.image_2 %}
-    <img src="{{book_id.image_2.url}}" alt="" width="300", height=" 400">
-{% else %}
-    <p>Фотография еще не добавлена</p>
-{% endif %}
+                <div class="book-detail__info">
+                    <h1 class="book-detail__title">{{ book_id.title }} ({{ book_id.created_data_book }})</h1>
+                    <p><strong>Автор:</strong> {{ book_id.author }}</p>
+                    <p><strong>Количество страниц:</strong> {{ book_id.count_pages }}</p>
+                    <p><strong>Жанр:</strong> {{ book_id.genre }}</p>
+                </div>
+            </div>
 
-{% if book_id.description %}
-    <p>{{book_id.description}}</p>
-{% else %}
-    <p>Описание пока не добавлено</p>
-{% endif %}
-<p>{{book_id.genre}}</p>
-{% if book_id.audio_book %}
-    <a href="{{book_id.audio_book}}">{{book_id.audio_book}}</a>
-{% else %}
-    <p>Пока без аудио - варианта</p>
-{% endif %}
-<p>{{book_id.created_at}}</p>
+            <div class="book-detail__extra">
+                <section>
+                    <h2>Описание</h2>
+                {% if book_id.description %}
+                    <p>{{ book_id.description }}</p>
+                {% else %}
+                    <p>Описание пока не добавлено</p>
+                {% endif %}
+                    <h2>Аудиокнига</h2>
+                {% if book_id.audio_book %}
+                    <a href="{{ book_id.audio_book }}">{{ book_id.audio_book }}</a>
+                {% else %}
+                    <p>Пока без аудио-варианта</p>
+                {% endif %}
+                </section>
+            </div>
+        </section>
+    </main>
+    <footer class="book-footer">
+            {{ book_id.created_at|date:"d.m.Y" }}
+    </footer>
+</body>
+</html>
+
+
 

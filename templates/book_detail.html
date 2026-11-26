@@ -1,0 +1,23 @@
+<h1>{{ book_id.title }} ({{ book_id.created_data_book }})</h1>
+<h2>Автор: {{ book_id.author }}</h2>
+<h3>Количество страниц: {{ book_id.count_pages }}</h3>
+
+{% if book_id.image_2 %}
+    <img src="{{book_id.image_2.url}}" alt="" width="300", height=" 400">
+{% else %}
+    <p>Фотография еще не добавлена</p>
+{% endif %}
+
+{% if book_id.description %}
+    <p>{{book_id.description}}</p>
+{% else %}
+    <p>Описание пока не добавлено</p>
+{% endif %}
+<p>{{book_id.genre}}</p>
+{% if book_id.audio_book %}
+    <a href="{{book_id.audio_book}}">{{book_id.audio_book}}</a>
+{% else %}
+    <p>Пока без аудио - варианта</p>
+{% endif %}
+<p>{{book_id.created_at}}</p>
+

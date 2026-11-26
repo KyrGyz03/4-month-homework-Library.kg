@@ -1,0 +1,121 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f3f5f7;
+    color: #20252b;
+    font-family: Arial, sans-serif;
+}
+
+.library {
+    width: min(100% - 40px, 1440px);
+    margin: 0 auto;
+    padding: 24px 0 40px;
+}
+
+.library__title {
+    margin: 0 0 24px;
+    text-align: center;
+    font-size: clamp(28px, 4vw, 42px);
+}
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-auto-rows: 50vh;
+    gap: 20px;
+}
+
+.book-card {
+    display: flex;
+    min-width: 0;
+    min-height: 0;
+    flex-direction: column;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #fff;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 3px 12px rgb(25 35 45 / 10%);
+    transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.book-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgb(25 35 45 / 16%);
+}
+
+.book-card__cover {
+    display: grid;
+    min-height: 0;
+    flex: 1;
+    place-items: center;
+    overflow: hidden;
+    background: #e8ebef;
+}
+
+.book-card__cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.book-card__no-cover {
+    padding: 12px;
+    color: #68727d;
+    text-align: center;
+}
+
+.book-card__info {
+    padding: 10px 12px 12px;
+}
+
+.book-card__title {
+    display: -webkit-box;
+    margin: 0 0 4px;
+    overflow: hidden;
+    font-size: 16px;
+    line-height: 1.3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.book-card__author,
+.book-card__date {
+    display: block;
+    margin: 0;
+    overflow: hidden;
+    color: #68727d;
+    font-size: 13px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.book-card__date {
+    margin-top: 5px;
+}
+
+.book-list__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+@media (max-width: 900px) {
+    .book-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 560px) {
+    .library {
+        width: min(100% - 24px, 420px);
+    }
+
+    .book-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-auto-rows: 34vh;
+        gap: 12px;
+    }
+}

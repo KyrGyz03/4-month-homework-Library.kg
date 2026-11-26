@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'book/css/book_list.css' %}">
+</head>
+<body>
+    <main class="library">
+        <h1 class="library__title">Библиотека</h1>
+
+        <section class="book-list">
+            {% if book_list %}
+                {% for book in book_list %}
+                    <a class="book-card" href="/books/{{book.id}}/">
+                        <div class="book-card__cover">
+                            {% if book.image_1 %}
+                                <img src="{{ book.image_1.url }}" >
+                            {% else %}
+                                <span class="book-card__no-cover">Обложка не добавлена</span>
+                            {% endif %}
+                        </div>
+                        <div class="book-card__info">
+                            <h2 class="book-card__title">{{ book.title }}</h2>
+                            <p class="book-card__author">{{ book.author }}</p>
+                            <time class="book-card__date" datetime="{{ book.created_at|date:'Y-m-d' }}">
+                                {{ book.created_at|date:"d.m.Y" }}
+                            </time>
+                        </div>
+                    </a>
+                    {% endfor %}
+            {% else %}
+                <p class="book-list__empty">Книг пока нет.</p>
+            {% endif %}
+        </section>
+    </main>
+</body>
+</html>
